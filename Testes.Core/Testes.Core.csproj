@@ -36,6 +36,7 @@
     <Compile Include="ClasseTeste.cs" />
     <Compile Include="ValidationResultExtension.cs" />
     <Compile Include="ObservableDictionary.cs" />
+    <Compile Include="ViewModels\BaseViewModel.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
@@ -55,5 +56,6 @@
     <Reference Include="MvvmValidation">
       <HintPath>..\packages\MvvmValidation.2.0.2\lib\portable-win8+net45+sl5+wp8\MvvmValidation.dll</HintPath>
     </Reference>
+    <Reference Include="System" />
   </ItemGroup>
 </Project>

@@ -4,12 +4,13 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
+<!--    <android.support.design.widget.TextInputLayout-->
     <EditText
         android:inputType="number"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textSize="40dp"
-        android:hint="Email"
+        android:hint="Valor"
         local:MvxBind="Text Valor; Error Errors['Valor']" />
     <EditText
         android:inputType="number"
@@ -18,6 +19,7 @@
         android:textSize="40dp"
         android:hint="Codigo"
         local:MvxBind="Text Codigo; Error Errors['Codigo']" />
+<!--    </android.support.design.widget.TextInputLayout>-->
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

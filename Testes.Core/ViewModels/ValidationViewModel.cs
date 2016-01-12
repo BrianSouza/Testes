@@ -7,16 +7,27 @@ using MvvmValidation;
 namespace Testes.Core.ViewModels
 {
     public class ValidationViewModel 
-		: MvxViewModel
+		: BaseViewModel
     {
-		private ValidationHelper validator;
+		
 		private ObservableCollection<ClasseTeste> _Linhas;
+		public ObservableCollection<ClasseTeste> Linhas
+		{
+			get{ 
+				return _Linhas; 
+			}
+			set{
+				_Linhas = value;
+				RaisePropertyChanged (() => Linhas);
+			}
+		}
+
 		public ValidationViewModel ()
 		{
 			Linhas = new ObservableCollection<ClasseTeste> ();
-			validator = new ValidationHelper ();
-			validator.AddRule (() => Codigo, () => RuleResult.Assert (Valor > 0, "Email is required."));
-			validator.AddRule (() => Valor, () => RuleResult.Assert (Valor > 0, "Password is required."));
+
+			Validator.AddRule (() => Codigo, () => RuleResult.Assert (Codigo != "" , "Código deve ser maior que zero."));
+			Validator.AddRule (() => Valor, () => RuleResult.Assert (Valor != "", "Valor deve ser maior que zero"));
 		}
 
 		private ObservableDictionary<string,string> _Errors;
@@ -32,11 +43,12 @@ namespace Testes.Core.ViewModels
 			}
 		}
 
-		private double _Valor;
-		public double Valor
+		private string _Valor;
+		public string Valor
 		{
 			get
 			{
+				Validate ("Valor");
 				return _Valor;
 			}
 			set {
@@ -45,46 +57,55 @@ namespace Testes.Core.ViewModels
 			}
 		}
 
-		private int _Codigo;
-		public int Codigo
+		private string _Codigo;
+		public string Codigo
 		{
 			get{
+				Validate ("Codigo");
 				return _Codigo;
 			}
 			set{
-				Validate ();
 				_Codigo = value;
 				RaisePropertyChanged ();
 			}
 		}
-		public ObservableCollection<ClasseTeste> Linhas
-		{
-			get{ return _Linhas; }
-			set{
-				_Linhas = value;
-				RaisePropertyChanged (() => Linhas);
 
-			}
-		}
 		public ICommand AddCommand
 		{
 			get { 
-				Validate ();
-				return new MvxCommand(() => Linhas.Add(
-					new ClasseTeste(){
-						Id = Codigo,
-						Valor = Valor
-					}));
+				if (!Validate("ALL"))
+					return new MvxCommand (() => _Codigo  = "" );
+				
+			    return new MvxCommand (() => Linhas.Add (
+						new ClasseTeste () {
+						Id = int.Parse(Codigo),
+						Valor = double.Parse(Valor)
+						}));
+				
 			}
 		}
 
-		private void Validate()
+		private bool Validate(string nomePropriedade)
 		{
-			
+			ValidationResult result = null;
+			switch (nomePropriedade) 
+			{
+			case "Codigo":
+					result = Validator.GetResult (() => Codigo);
+					break;
+			case "Valor":
+					result = Validator.GetResult (() => Valor);
+					break;
+			case "ALL":
+					result = Validator.ValidateAll();
+			break;
 
-			var result = validator.ValidateAll();
+			}
 
-			var Errors = result.AsObservableDictionary();
+			Errors = result.AsObservableDictionary();
+			return result.IsValid;
 		}
+
+
     }
 }
