@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:local="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <EditText
+        android:inputType="number"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="40dp"
+        android:hint="Email"
+        local:MvxBind="Text Valor; Error Errors['Valor']" />
+    <EditText
+        android:inputType="number"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="40dp"
+        android:hint="Codigo"
+        local:MvxBind="Text Codigo; Error Errors['Codigo']" />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        local:MvxBind="Click AddCommand"
+        android:id="@+id/btnteste"
+        android:text="Teste" />
+    <Mvx.MvxListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        local:MvxItemTemplate="@layout/layoutlist"
+        local:MvxBind="ItemsSource Linhas" />
+</LinearLayout>
