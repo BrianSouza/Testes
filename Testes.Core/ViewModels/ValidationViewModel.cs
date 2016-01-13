@@ -26,8 +26,25 @@ namespace Testes.Core.ViewModels
 		{
 			Linhas = new ObservableCollection<ClasseTeste> ();
 
-			Validator.AddRule (() => Codigo, () => RuleResult.Assert (Codigo != "" , "Código deve ser maior que zero."));
-			Validator.AddRule (() => Valor, () => RuleResult.Assert (Valor != "", "Valor deve ser maior que zero"));
+			Validator.AddRule (() => Codigo, () => RuleResult.Assert (ValidaNumeros(Codigo) , "Código não pode ser vazio ou igual a 0."));
+			Validator.AddRule (() => Valor, () => RuleResult.Assert (ValidaNumeros(Valor), "Valor não pode ser vazio ou igual a 0."));
+		}
+
+		public bool ValidaNumeros(string numero)
+		{
+			double dNumero;
+//			int iNumero;
+			bool bConvertDouble = double.TryParse(numero,out dNumero);
+//					bool iConvert
+			if (bConvertDouble) {
+				if (dNumero > 0)
+					return true;
+				else
+					return false;
+			} 
+			else
+				return false;
+						
 		}
 
 		private ObservableDictionary<string,string> _Errors;
@@ -48,10 +65,10 @@ namespace Testes.Core.ViewModels
 		{
 			get
 			{
-				Validate ("Valor");
 				return _Valor;
 			}
 			set {
+				Validate ("Valor");
 				_Valor = value;
 				RaisePropertyChanged (() => Valor);
 			}
@@ -61,10 +78,11 @@ namespace Testes.Core.ViewModels
 		public string Codigo
 		{
 			get{
-				Validate ("Codigo");
+				
 				return _Codigo;
 			}
 			set{
+				Validate ("Codigo");
 				_Codigo = value;
 				RaisePropertyChanged ();
 			}
@@ -73,8 +91,8 @@ namespace Testes.Core.ViewModels
 		public ICommand AddCommand
 		{
 			get { 
-				if (!Validate("ALL"))
-					return new MvxCommand (() => _Codigo  = "" );
+//				if (!Validate("ALL"))
+//					return new MvxCommand (() => _Codigo  = "" );
 				
 			    return new MvxCommand (() => Linhas.Add (
 						new ClasseTeste () {
