@@ -2,6 +2,7 @@ using Cirrious.MvvmCross.ViewModels;
 using System.Windows.Input;
 using System.Collections.ObjectModel;
 using MvvmValidation;
+using System;
 
 
 namespace Testes.Core.ViewModels
@@ -26,25 +27,25 @@ namespace Testes.Core.ViewModels
 		{
 			Linhas = new ObservableCollection<ClasseTeste> ();
 
-			Validator.AddRule (() => Codigo, () => RuleResult.Assert (ValidaNumeros(Codigo) , "Código não pode ser vazio ou igual a 0."));
-			Validator.AddRule (() => Valor, () => RuleResult.Assert (ValidaNumeros(Valor), "Valor não pode ser vazio ou igual a 0."));
+			Validator.AddRule (() => Codigo, () => RuleResult.Assert (ValidaNumeros(Codigo) , "Código deve ser um número maior do que 0."));
+			Validator.AddRule (() => Valor, () => RuleResult.Assert (ValidaNumeros(Valor), "Valor deve ser um número maior do que 0."));
 		}
 
-		public bool ValidaNumeros(string numero)
+		public bool ValidaNumeros<T>(T numero)
 		{
-			double dNumero;
-//			int iNumero;
-			bool bConvertDouble = double.TryParse(numero,out dNumero);
-//					bool iConvert
-			if (bConvertDouble) {
-				if (dNumero > 0)
+			if (numero.GetType () == typeof(int)) {
+
+				if (Convert.ToInt32(numero) > 0)
 					return true;
 				else
 					return false;
-			} 
-			else
+			} else if (numero.GetType () == typeof(double)) {
+				if (Convert.ToDouble(numero) > 0)
+					return true;
+				else
+					return false;
+			} else
 				return false;
-						
 		}
 
 		private ObservableDictionary<string,string> _Errors;
@@ -60,29 +61,27 @@ namespace Testes.Core.ViewModels
 			}
 		}
 
-		private string _Valor;
-		public string Valor
+		private double _Valor;
+		public double Valor
 		{
 			get
 			{
 				return _Valor;
 			}
 			set {
-				Validate ("Valor");
 				_Valor = value;
 				RaisePropertyChanged (() => Valor);
 			}
 		}
 
-		private string _Codigo;
-		public string Codigo
+		private int _Codigo;
+		public int Codigo
 		{
 			get{
 				
 				return _Codigo;
 			}
 			set{
-				Validate ("Codigo");
 				_Codigo = value;
 				RaisePropertyChanged ();
 			}
@@ -91,18 +90,21 @@ namespace Testes.Core.ViewModels
 		public ICommand AddCommand
 		{
 			get { 
-//				if (!Validate("ALL"))
-//					return new MvxCommand (() => _Codigo  = "" );
-				
-			    return new MvxCommand (() => Linhas.Add (
-						new ClasseTeste () {
-						Id = int.Parse(Codigo),
-						Valor = double.Parse(Valor)
-						}));
+			    return new MvxCommand (AddLinha);
 				
 			}
 		}
-
+		private void AddLinha()
+		{
+			if(!Validate("ALL"))
+				return;
+			
+			Linhas.Add (
+				new ClasseTeste () {
+					Id = Codigo,
+					Valor = Valor
+				});
+		}
 		private bool Validate(string nomePropriedade)
 		{
 			ValidationResult result = null;
@@ -123,6 +125,7 @@ namespace Testes.Core.ViewModels
 			Errors = result.AsObservableDictionary();
 			return result.IsValid;
 		}
+
 
 
     }
