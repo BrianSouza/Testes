@@ -126,7 +126,28 @@ namespace Testes.Core.ViewModels
 			return result.IsValid;
 		}
 
+		private ClasseTeste _SelectedItem;
+		public ICommand SelectedItem
+		{
+			get {
+				return new MvxCommand<ClasseTeste> (RemoveSelectedItem);
+			}
+		}
+//		public ClasseTeste SelectedItem
+//		{
+//			get { 
+//				return _SelectedItem; 
+//			}
+//			set { 
+//				_SelectedItem = value; 
+//				RaisePropertyChanged(() => SelectedItem); }
+//		}
 
+		public void RemoveSelectedItem(ClasseTeste item)
+		{
+			if(item !=  null)
+			Linhas.Remove (item);
+		}
 
     }
 }

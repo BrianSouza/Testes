@@ -30,5 +30,5 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         local:MvxItemTemplate="@layout/layoutlist"
-        local:MvxBind="ItemsSource Linhas" />
+        local:MvxBind="ItemsSource Linhas;ItemClick SelectedItem" />
 </LinearLayout>
