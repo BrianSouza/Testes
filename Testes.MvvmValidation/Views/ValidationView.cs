@@ -12,5 +12,7 @@ namespace Testes.MvvmValidation.Views
             base.OnCreate(bundle);
 			SetContentView(Resource.Layout.ValidationView);
         }
+
+
     }
 }
