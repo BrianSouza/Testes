@@ -146,7 +146,7 @@ namespace Testes.Core.ViewModels
 //						Linhas.Remove (item);
 //					});
 
-				var manager = Mvx.CanResolve<IUserInteraction>();
+//				var manager = Mvx.CanResolve<IUserInteraction>();
 //				manager.Confirm ("remover ?", () => 
 //										{
 //											Linhas.Remove (item);
@@ -162,6 +162,12 @@ namespace Testes.Core.ViewModels
 //						}
 //					});
 			
+				var result = Mvx.Resolve<IDialogService>().ShowAsync("Are you sure you want to delete selected user?", "Confirmation", "OK", "Cancel");
+				if(result.Result == true)
+					{
+					Linhas.Remove (item);
+					}
+
 
 			}
 			
