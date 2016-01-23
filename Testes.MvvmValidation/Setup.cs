@@ -4,7 +4,7 @@ using Cirrious.MvvmCross.Droid.Platform;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.CrossCore;
 using Testes.Core;
-using Testes.MvvmValidation.Services;
+using Testes.Core.Services;
 
 namespace Testes.MvvmValidation
 {
@@ -16,6 +16,7 @@ namespace Testes.MvvmValidation
 
         protected override IMvxApplication CreateApp()
         {
+			Mvx.RegisterType<IAlertMessage, AlertMessage>();
             return new Core.App();
         }
 		
@@ -26,7 +27,6 @@ namespace Testes.MvvmValidation
 
 		protected override void InitializeLastChance()
 		{
-			Mvx.RegisterSingleton<IDialogService>(new DialogService());
 			base.InitializeLastChance();
 		}
     }

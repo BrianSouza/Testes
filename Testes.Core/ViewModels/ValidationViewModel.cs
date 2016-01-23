@@ -3,8 +3,8 @@ using System.Windows.Input;
 using System.Collections.ObjectModel;
 using MvvmValidation;
 using System;
-using Chance.MvvmCross.Plugins.UserInteraction;
 using Cirrious.CrossCore;
+using Testes.Core.Services;
 
 
 namespace Testes.Core.ViewModels
@@ -141,47 +141,12 @@ namespace Testes.Core.ViewModels
 		public void RemoveSelectedItem(ClasseTeste item)
 		{
 			if (item != null) {
-//				Mvx.Resolve<IUserInteraction>().Confirm("Are you sure?",  () => 
-//					{
-//						Linhas.Remove (item);
-//					});
-
-//				var manager = Mvx.CanResolve<IUserInteraction>();
-//				manager.Confirm ("remover ?", () => 
-//										{
-//											Linhas.Remove (item);
-//										});
-
-//				_confirmCancelInteractionRequest.Raise(
-//					new Confirmation("Are you sure you wish to cancel?"),
-//					confirmation =>
-//					{
-//						if (confirmation.Confirmed)
-//						{
-//							Linhas.Remove (item);										
-//						}
-//					});
-			
-				var result = Mvx.Resolve<IDialogService>().ShowAsync("Are you sure you want to delete selected user?", "Confirmation", "OK", "Cancel");
-				if(result.Result == true)
-					{
+				Mvx.Resolve<IAlertMessage> ().Confirm ("Deseja remover está linha ?", async () =>  {
 					Linhas.Remove (item);
-					}
+				}, "Remover Linha", "Sim", "Não");
 
-
+				
 			}
-			
 		}
-//
-//		private InteractionRequest<Confirmation> _confirmCancelInteractionRequest = new InteractionRequest<Confirmation>();
-//		public IInteractionRequest ConfirmCancelInteractionRequest
-//		{
-//			get
-//			{
-//				return _confirmCancelInteractionRequest;
-//			}
-//		}
-
-
     }
 }

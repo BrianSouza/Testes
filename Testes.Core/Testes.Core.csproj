@@ -38,7 +38,9 @@
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="IInteractionRequest.cs" />
     <Compile Include="Entidades\ClasseTeste.cs" />
-    <Compile Include="Services\IDialogService.cs" />
+    <Compile Include="Services\IAlertMessage.cs" />
+    <Compile Include="Entidades\InputResponse.cs" />
+    <Compile Include="Entidades\ConfirmThreeButtonsResponse.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
@@ -59,9 +61,6 @@
       <HintPath>..\packages\MvvmValidation.2.0.2\lib\portable-win8+net45+sl5+wp8\MvvmValidation.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="Chance.MvvmCross.Plugins.UserInteraction">
-      <HintPath>..\packages\Chance.MvvmCross.Plugins.UserInteraction.1.1.4\lib\portable-win+net45+wp8+win8+wpa81\Chance.MvvmCross.Plugins.UserInteraction.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Services\" />

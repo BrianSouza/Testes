@@ -76,7 +76,7 @@
     <Compile Include="Setup.cs" />
     <Compile Include="SplashScreen.cs" />
     <Compile Include="Views\ValidationView.cs" />
-    <Compile Include="Services\DialogService.cs" />
+    <Compile Include="Services\AlertMessage.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

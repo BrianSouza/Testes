@@ -1,6 +1,5 @@
 using Cirrious.CrossCore.IoC;
 using Cirrious.CrossCore;
-using Chance.MvvmCross.Plugins.UserInteraction;
 
 namespace Testes.Core
 {
