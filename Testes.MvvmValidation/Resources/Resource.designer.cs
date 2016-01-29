@@ -87,6 +87,9 @@ namespace Testes.MvvmValidation
 			// aapt resource value: 0x7f050000
 			public const int MvxBindingTagUnique = 2131034112;
 			
+			// aapt resource value: 0x7f050002
+			public const int btnNext = 2131034114;
+			
 			// aapt resource value: 0x7f050001
 			public const int btnteste = 2131034113;
 			
@@ -104,13 +107,16 @@ namespace Testes.MvvmValidation
 		{
 			
 			// aapt resource value: 0x7f040000
-			public const int layoutlist = 2130968576;
+			public const int ExNavigationView = 2130968576;
 			
 			// aapt resource value: 0x7f040001
-			public const int SplashScreen = 2130968577;
+			public const int layoutlist = 2130968577;
 			
 			// aapt resource value: 0x7f040002
-			public const int ValidationView = 2130968578;
+			public const int SplashScreen = 2130968578;
+			
+			// aapt resource value: 0x7f040003
+			public const int ValidationView = 2130968579;
 			
 			static Layout()
 			{

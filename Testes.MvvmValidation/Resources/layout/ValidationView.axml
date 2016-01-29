@@ -31,4 +31,10 @@
         android:layout_height="wrap_content"
         local:MvxItemTemplate="@layout/layoutlist"
         local:MvxBind="ItemsSource Linhas;ItemClick SelectedItem" />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        local:MvxBind="Click NextViewModel"
+        android:id="@+id/btnNext"
+        android:text="Proximo" />
 </LinearLayout>

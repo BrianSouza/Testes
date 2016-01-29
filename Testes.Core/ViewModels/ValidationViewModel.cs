@@ -5,6 +5,9 @@ using MvvmValidation;
 using System;
 using Cirrious.CrossCore;
 using Testes.Core.Services;
+using Cirrious.CrossCore.Platform;
+using Cirrious.MvvmCross.Plugins.File;
+using Newtonsoft.Json;
 
 
 namespace Testes.Core.ViewModels
@@ -106,6 +109,8 @@ namespace Testes.Core.ViewModels
 					Id = Codigo,
 					Valor = Valor
 				});
+			_parameterKey = JsonConvert.SerializeObject (Linhas);
+			
 		}
 		private bool Validate(string nomePropriedade)
 		{
@@ -148,5 +153,34 @@ namespace Testes.Core.ViewModels
 				
 			}
 		}
+		string jsonTeste = string.Empty;
+		public void ToJson()
+		{
+			jsonTeste = JsonConvert.SerializeObject (Linhas);
+		}
+
+
+		private string _parameterKey;
+		public string ParameterKey
+		{
+			get { return _parameterKey; }
+			set
+			{
+				_parameterKey = value;
+				RaisePropertyChanged(() => ParameterKey);
+			}
+		}
+		public ICommand NextViewModel
+		{
+			get {
+				
+				return
+					new MvxCommand(
+						() =>
+						ShowViewModel<ExNavigationViewModel>(new ExNavigationViewModel.Parameters {Key = ParameterKey}));
+			}
+		}
+
+
     }
 }

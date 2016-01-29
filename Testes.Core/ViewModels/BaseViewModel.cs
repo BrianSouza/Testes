@@ -33,6 +33,8 @@ namespace Testes.Core.ViewModels
 			add { NotifyDataErrorInfoAdapter.ErrorsChanged += value; }
 			remove { NotifyDataErrorInfoAdapter.ErrorsChanged -= value; }
 		}
+
+
 	}
 }
 
