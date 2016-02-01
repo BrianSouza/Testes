@@ -5,6 +5,7 @@ using Cirrious.MvvmCross.ViewModels;
 using Cirrious.CrossCore;
 using Testes.Core;
 using Testes.Core.Services;
+using Cirrious.MvvmCross.Plugins.File;
 
 namespace Testes.MvvmValidation
 {
@@ -17,6 +18,7 @@ namespace Testes.MvvmValidation
         protected override IMvxApplication CreateApp()
         {
 			Mvx.RegisterType<IAlertMessage, AlertMessage>();
+			Mvx.RegisterType<IMvxFileStore, WRService>();
             return new Core.App();
         }
 		

@@ -1,6 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
+using Testes.Core.DATA;
 
 namespace Testes.Core.ViewModels
 {
@@ -21,9 +22,10 @@ namespace Testes.Core.ViewModels
 			}
 		}
 
-		public void Init(Parameters parameters)
+		public void Init()
 		{
-			Key = parameters.Key;
+//			Key = parameters.Key;
+			string ler = WRSFiles.Ler();
 			var teste = JsonConvert.DeserializeObject<ObservableCollection<ClasseTeste>> (Key);
 		}
 

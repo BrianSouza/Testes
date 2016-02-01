@@ -42,6 +42,7 @@
     <Compile Include="Entidades\InputResponse.cs" />
     <Compile Include="Entidades\ConfirmThreeButtonsResponse.cs" />
     <Compile Include="ViewModels\ExNavigationViewModel.cs" />
+    <Compile Include="DATA\WRSFiles.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
@@ -72,5 +73,6 @@
   <ItemGroup>
     <Folder Include="Services\" />
     <Folder Include="Entidades\" />
+    <Folder Include="DATA\" />
   </ItemGroup>
 </Project>
